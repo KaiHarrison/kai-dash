@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kai's Daily Focus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f9f9f9;
+      color: #111;
+      padding: 1rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1rem;
+      color: #444;
+    }
+    .card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: auto;
+    }
+    .card.active {
+      display: flex;
+    }
+    .card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+    }
+    .section-title {
+      font-weight: 600;
+      margin-top: 1rem;
+      color: #888;
+      font-size: 0.95rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+    }
+    ul li {
+      margin-bottom: 0.4rem;
+    }
+    .reflection {
+      margin-top: 1.5rem;
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+    }
+    .reflection h3 {
+      margin-top: 0;
+    }
+    .domains-list li::before {
+      content: "\1F4BB";
+      margin-right: 0.5rem;
+    }
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #999;
+      padding-bottom: 2rem;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kai's Daily Focus</h1>
+    <p>Stay aligned. One priority. One direction.</p>
+  </header>
+
+  <div id="focus-container"></div>
+
+  <footer>
+    <p>“Don’t decide. Execute the plan.” | Default to this plan, adapt only when Philips work takes over.</p>
+  </footer>
+
+  <script>
+    const days = {
+      0: {
+        title: "Sunday – Reflection & Planning",
+        morning: ["Review metrics, journal wins, review dashboard"],
+        afternoon: ["Light planning, family reset"],
+        goal: "Intentional reset",
+        questions: [
+          "What did I learn last week that I can apply?",
+          "Where am I off course and how do I reset it?"
+        ],
+        domains: ["🧠 Planner", "📊 Data Analyst", "👨‍👩‍👧 Family Facilitator"]
+      },
+      1: {
+        title: "Monday – Revenue & Leverage",
+        morning: ["Soaprise sales & growth tasks"],
+        afternoon: ["Marketing, outreach, or visual asset production"],
+        goal: "Assertive momentum",
+        questions: [
+          "What one action would move Soaprise forward most today?",
+          "Where can I unlock new leverage for growth this week?"
+        ],
+        domains: ["🚀 Founder", "📣 Marketing Strategist", "🎨 Creative Director"]
+      },
+      2: {
+        title: "Tuesday – Build & Ship",
+        morning: ["Soaprise product development & packaging finalisation"],
+        afternoon: ["Launch prep or Shopify updates"],
+        goal: "Creative confidence",
+        questions: [
+          "What can I finish or ship today?",
+          "Where is my creativity asking to be unleashed?"
+        ],
+        domains: ["🧪 Product Designer", "📦 Packaging Lead", "🛒 Shopify Ops"]
+      },
+      3: {
+        title: "Wednesday – Body & Mind Reset",
+        morning: ["Yoga, dog walk, slow start"],
+        afternoon: ["Light family admin or housework"],
+        goal: "Calm clarity",
+        questions: [
+          "How can I support my body and mind to regenerate today?",
+          "What can I clear away—physically or mentally—to restore energy?"
+        ],
+        domains: ["🧘 Self-Care Architect", "🏡 Domestic CEO", "🧠 Mindful Parent"]
+      },
+      4: {
+        title: "Thursday – Power Plays",
+        morning: ["Sales calls, media shoots, bold tasks"],
+        afternoon: ["Marketing strategy or PR push"],
+        goal: "Focused domination",
+        questions: [
+          "What bold move can I make today to break through a plateau?",
+          "Who needs to hear from me today to unlock growth?"
+        ],
+        domains: ["💼 Rainmaker", "📷 Public Face", "🧭 Strategic Operator"]
+      },
+      5: {
+        title: "Friday – Systems & Structure",
+        morning: ["Automation, batch tasks, delegation"],
+        afternoon: ["Renovation decisions & admin"],
+        goal: "Control + closure",
+        questions: [
+          "What’s causing friction or disorganization I can resolve today?",
+          "What decisions have I been postponing that deserve closure?"
+        ],
+        domains: ["⚙️ Workflow Engineer", "📐 Home Project Manager", "🔧 System Builder"]
+      },
+      6: {
+        title: "Saturday – Family & Fun Projects",
+        morning: ["Hallie time, creative play, nature walks"],
+        afternoon: ["Side projects or film fun content"],
+        goal: "Joy + curiosity",
+        questions: [
+          "How can I surprise and delight my family today?",
+          "What playful or experimental idea is worth exploring?"
+        ],
+        domains: ["👨‍👧 Adventurer Dad", "🎥 Family Film Director", "🧩 Creative Tinkerer"]
+      }
+    };
+
+    const today = new Date().getDay();
+    const dayData = days[today];
+
+    const container = document.getElementById('focus-container');
+    const card = document.createElement('div');
+    card.className = 'card active';
+
+    card.innerHTML = `
+      <h2>${dayData.title}</h2>
+      <p class="section-title">Morning</p>
+      <ul>${dayData.morning.map(item => `<li>${item}</li>`).join('')}</ul>
+      <p class="section-title">Afternoon</p>
+      <ul>${dayData.afternoon.map(item => `<li>${item}</li>`).join('')}</ul>
+      <p class="section-title">Goal</p>
+      <ul><li>${dayData.goal}</li></ul>
+      <p class="section-title">Focus Domains</p>
+      <ul class="domains-list">${dayData.domains.map(d => `<li>${d}</li>`).join('')}</ul>
+      <div class="reflection">
+        <h3>Reflective Questions</h3>
+        <ul>${dayData.questions.map(q => `<li>${q}</li>`).join('')}</ul>
+      </div>
+    `;
+
+    container.appendChild(card);
+  </script>
+</body>
+</html>
